@@ -76,3 +76,15 @@ Werden in der Regel mit Bildern und Text dargestellt, wenn eine Bearbeitung nich
 ## Laden der Daten
 Die folgende Grafik fasst das Laden, Konvertieren und Messen der Daten seht gut zusammen
 ![DatenLadenKonvertierenMessen](DatenLadenKonvertierenMessen.png) Im Quelltext findet man den echten Code dazu.
+
+## Binden der Daten
+Beim Binden der Daten findet die Abbildung eines Array- oder eines anderen Eintrags aus den geladenen Daten an ein View-Element statt. Oft muss dieses noch neu erzeugt werden. Der Trick besteht darin, dass eine Eigenschaft eines View-Elements durch einen Dateneintrag und somit durch den Wert eines Datums aus dem Datensatz ausgedrückt wird.
+
+```javascript
+svg
+    .selectAll("rect") // jeder CSS-Selektor ist möglich, ein Element-Type ist üblich
+    .data(myData) // erst durch die Daten weiß D3 wieviele Rechtecke erzeugt werden sollen
+    .join("element to add");
+```
+Nach diesem Schritt sind die Daten mit den Elemente der View verknüpft. Immer wenn man auf ein Element zugreift, hat man auch Zugriff auf dessen Daten.
+![Databinding durch Selection](./DatabindingViaSelection.png)

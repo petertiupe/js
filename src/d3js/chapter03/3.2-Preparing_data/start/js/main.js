@@ -61,8 +61,28 @@ function printArray(ar) {
 }
 
 const createViz = (data) => {
-  printArray(data)  
-};
+  printArray(data);
+  const barHeight = 20; // Die Höhe eines Rechtecks zur Darstellung...
+  svg
+  .selectAll("rect") // jeder CSS-Selektor ist möglich, ein Element-Type ist üblich
+  .data(data) // erst durch die Daten weiß D3 wieviele Rechtecke erzeugt werden sollen
+  .join("rect") // hier wird das Rechteck erzeugt Man hat nun n leere Rechtecke im DOM
+                 // die man im Inspector auch sieht.
+    .attr("class", dEntry => {
+        console.log(dEntry);
+        return `bar bar-${dEntry.technology}` // für jedes Rechteck wird die CSS-Klasse bar und eine in der Form bar-QGIS gesetzt
+                                             // Damit hat man die Möglichkeit alle gleich zu gestalten aber auch spezieller wenn nötig.
+                                             // Hier wird ein Template-Literal wie in Kotlin verwendet.
+      })
+    .attr("width", dEntry => dEntry.count)
+    .attr("height", barHeight)
+    .attr("x", 0) // jedes Rechteck beginnt links in der SVG-View-Box
+    .attr("y", (d, i) => (barHeight + 5) * i) // Das d wird hier nur mitgegeben, weil der i-Parameter benötigt wird
+    .attr("fill", d => d.technology == "D3.js" ? "yellowgreen" : "skyblue")
+
+
+
+}
 
 
 
