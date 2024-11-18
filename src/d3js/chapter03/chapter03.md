@@ -74,4 +74,5 @@ Für Geo-Daten gibt es unterschiedliche Standards, im Buch werden GeoJSON und To
 Werden in der Regel mit Bildern und Text dargestellt, wenn eine Bearbeitung nicht möglich scheint oder zu aufwendig ist. D3 unterstützt diese Form der Darstellung, mit *echter* Datenverarbeitung vor der Darstellung hat dies weniger zu tun.
 
 ## Laden der Daten
-
+Die folgende Grafik fasst das Laden, Konvertieren und Messen der Daten seht gut zusammen
+![DatenLadenKonvertierenMessen](DatenLadenKonvertierenMessen.png) Im Quelltext findet man den echten Code dazu.

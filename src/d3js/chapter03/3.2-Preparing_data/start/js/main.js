@@ -48,7 +48,21 @@ let data = d3.csv("data/data.csv", fullDatasetFunc)
 
   });
 
-const createViz = (data) => {};
+function printArray(ar) {
+    // Eine andere Variante ist
+    console.log("======================")
+    console.log("Ausgabe der Arraywerte")
+    console.log("======================")
+    for(let i=0; i < ar.length; i++) {
+        console.log(ar[i].count + " " +ar[i].technology)
+    }
+    console.log("==========")
+
+}
+
+const createViz = (data) => {
+  printArray(data)  
+};
 
 
 
