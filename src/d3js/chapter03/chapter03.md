@@ -88,3 +88,68 @@ svg
 ```
 Nach diesem Schritt sind die Daten mit den Elemente der View verknüpft. Immer wenn man auf ein Element zugreift, hat man auch Zugriff auf dessen Daten.
 ![Databinding durch Selection](./DatabindingViaSelection.png)
+
+# Skalierung oder Scales
+Der letzte Schritt einer standardmäßigen Bearbeitung besteht darin, die Daten, die an die Oberflächenelemente gebunden sind, so zu skalieren, dass die Darstellung sinnvoll wird oder sie noch zu verbessern. D3 bietet dafür die sogenannten Scales an.
+
+## Definition "Scales"
+Scales sind Funktionen, die einen Wert des Data-Sets als Input haben und einen Output-Wert haben, der direkt als Eigenschaft des Visualisierungs-Attributs (z. B. size, position, color) des anzuzeigenden Elements genutzt werden kann.
+
+Man kann die Daten aus dem Datensatz als Werte einer Domain betrachten, diese Werden dann transformiert, im einfachsten Fall linear:
+
+```javascript
+const myScale = d3.scaleLinear()
+  .domain([0, 200])
+  .range([0, 20]);
+
+myScale(100) // liefert dann 10, wie oben gesagt ist myScale eine Funktion
+
+domain => [0, 100] possible min and max values of the input, in %
+range  => [0, 500] related min and max values of the output, in pixels
+
+domain => ["Drama", "Action", "Crime", "Comedy"] possible inputs
+range  => ["purple", "blue", "green", "yellow"]  corresponding outputs
+
+domain => [60, 70, 80] thresholds of the input values
+range  => ["o˜˜˜o", "●_●", "‒‿‒", "♥‿♥"] corresponding output
+
+domain => ["Nine Perfect Strangers", "Maid", "Katla", ...] list of inputs
+range  => [0, 500] related min and max values of the output, in pixels
+
+```
+
+
+Ein in dem Beispiel verwendetes Scaling ist das Band-Scaling
+```javascript
+const svg = d3.select("svg")
+    .attr("width", 500)
+    .attr("height", 300);
+
+const data = ["Apples", "Bananas", "Oranges"];
+
+const x = d3.scaleBand()
+    .domain(data)
+    .range([0, 400])
+    .padding(0.2);
+
+svg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", (d) => x(d))
+    .attr("y", 50)
+    .attr("width", x.bandwidth())
+    .attr("height", 50);
+```
+
+![Bandscale](BandScale.png)
+**Wie BandScale arbeitet und welche Eigenschafte es kennt**
+
+Bei den Scales muss man folgende vier Typen unterscheiden, die den Wertebereich betreffen:
+- Scales with a continuous input and a continuous output
+- Scales with a discrete input and a discrete output
+- Scales with a continuous input and a discrete output
+- Scales with a discrete input and a continuous output
+
+Die Scales sind in D3 als eigenes Modul definiert. Es gibt über 20 Scale-Funktionen und im Buch
+ist eine Entscheidungs-Matrix, um die richtige zu ermitteln.

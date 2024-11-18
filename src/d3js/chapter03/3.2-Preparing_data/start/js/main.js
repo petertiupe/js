@@ -29,7 +29,7 @@ return {
 // Append a SVG container
 const svg = d3.select(".responsive-svg-container")
   .append("svg")
-  .attr("viewBox", "0 0 1200 1600")
+  .attr("viewBox", "0 0 600 700")
   .style("border", "1px solid black");
 
 let data = d3.csv("data/data.csv", fullDatasetFunc)
@@ -62,7 +62,21 @@ function printArray(ar) {
 
 const createViz = (data) => {
   printArray(data);
+  
+  // X-Scale liefert eine Funktion zurück
+  const xScale = d3.scaleLinear()
+  .domain([0, 1078])
+  .range([0, 450]);
+
+  // Es wird die jeweilige Technologie ausgelesen.
+  // Die Technologien werden gleichmäßig auf den Range verteilt, daraus ergibt sich die Höhe der Balken
+  const yScale = d3.scaleBand()
+  .domain(data.map(d => d.technology))
+  .range([0, 700])
+  .paddingInner(0.2); // akzeptiert Werte von 0 bis 1 
+  
   const barHeight = 20; // Die Höhe eines Rechtecks zur Darstellung...
+
   svg
   .selectAll("rect") // jeder CSS-Selektor ist möglich, ein Element-Type ist üblich
   .data(data) // erst durch die Daten weiß D3 wieviele Rechtecke erzeugt werden sollen
@@ -74,10 +88,10 @@ const createViz = (data) => {
                                              // Damit hat man die Möglichkeit alle gleich zu gestalten aber auch spezieller wenn nötig.
                                              // Hier wird ein Template-Literal wie in Kotlin verwendet.
       })
-    .attr("width", dEntry => dEntry.count)
+    .attr("width", dEntry => xScale(dEntry.count))
     .attr("height", barHeight)
     .attr("x", 0) // jedes Rechteck beginnt links in der SVG-View-Box
-    .attr("y", (d, i) => (barHeight + 5) * i) // Das d wird hier nur mitgegeben, weil der i-Parameter benötigt wird
+    .attr("y", dEntry => yScale(dEntry.technology)) // Das d wird hier nur mitgegeben, weil der i-Parameter benötigt wird
     .attr("fill", d => d.technology == "D3.js" ? "yellowgreen" : "skyblue")
 
 
