@@ -15,6 +15,7 @@ Im Buch wird eine Reihe interessanter Datenquellen genannt:
 - [Data.gov](https://data.gov/)
 - [openAfrica](https://africaopendata.org/)
 - [Dataportal.asia](https://dataportal.asia/)
+- [Weather-Underground Wetterdaten aus New York für Kapitel 4](https://www.wunderground.com)
 
 ## Datentypen
 Zunächst einmal lassen sich 
