@@ -16,6 +16,7 @@ Im Buch wird eine Reihe interessanter Datenquellen genannt:
 - [openAfrica](https://africaopendata.org/)
 - [Dataportal.asia](https://dataportal.asia/)
 - [Weather-Underground Wetterdaten aus New York für Kapitel 4](https://www.wunderground.com)
+- [Autotype-Artikel beim Laden von Daten](https://observablehq.com/@d3/d3-autotype)
 
 ## Datentypen
 Zunächst einmal lassen sich 
@@ -154,3 +155,16 @@ Bei den Scales muss man folgende vier Typen unterscheiden, die den Wertebereich 
 
 Die Scales sind in D3 als eigenes Modul definiert. Es gibt über 20 Scale-Funktionen und im Buch
 ist eine Entscheidungs-Matrix, um die richtige zu ermitteln.
+
+# Die Margin-Konvention
+Die Margin-Konvention beschreibt das Verhalten von D3, dass von Anfang an Platz für die
+Beschriftung der Skalen eingeplant wird. Die Planung von Anfang an, ist wichtig, um später 
+nicht die Größen dauernd anpassen zu müssen.
+
+![MarginKonvention](./MarginKonvention.png)
+
+Man bedient sich dann eines Tricks und platziert die Grafik mit einem Group-Objekt in  das inner Chart. Dies hat den Vorteil, dass man die Transformation nur auf diese Group-Objekt
+anwenden muss. Somit kann man Kurve und Axen gut voneinander trennen.
+
+# Achsen erzeugen
+Achsen werden in D3 ezeugt, indem man ein Scale an die Funktion `axis()` übergibt.
