@@ -71,4 +71,63 @@ const drawLineChart = (data) => {
     // Das Koordinatensystem ist fertig (am Text könnte man noch etwas tun), jetzt
     // wird der Graph gezeichnet (Line-Chart...)    
 
+    // Die Line-Charts werden in der Regel durch SVG-Path-Elemente erzeugt. Wie ich im SVG-Beispiel
+    // gezeigt habe, wird ein Path beispielsweise so erzeugt:
+
+    //  <path d="M 100 20 V 180 M 120 20 V 180" fill="none" stroke="black" stroke-width="2"/>
+
+    // Es wird also der d-Parameter gesetzt. Dieses findet man in D3 wieder.
+    // Die einzelnen Befehle kann man in der Datei svg.md nachlesen.
+
+    // Zeichnen der einzelnen Punkte
+    const aubergine = "#75485E";
+    const blau = "#0000FF"
+    const red ="#FF0000"
+    innerChart
+        .selectAll("circle")  // #1
+        .data(data)          
+        .join("circle")      
+        .attr("r", 4) // Radius der Datenpunkte ist 4 Px
+        .attr("cx", d => xScale(d.date))      //  #2
+        .attr("cy", d => yScale(d.avg_temp_F)) 
+        .attr("fill", aubergine);
+    
+    // Die Line-Generator - Funktion wird in einer Konstanten gespeichert, um sie
+    // später nutzen zu können.
+    const lineGenerator = d3.line()
+        .x(d => xScale(d.date)) // #1
+        .y(d => yScale(d.avg_temp_F)); // #2
+        
+    const curveGenerator = d3.line()
+        .x(d => xScale(d.date))
+        .y(d => yScale(d.avg_temp_F))
+        .curve(d3.curveCatmullRom);
+
+    // Ich habe Kurve und Line eingezeichnet, da sieht man gleich 
+    // den Unterschied
+
+    innerChart
+        .append("path")
+        .attr("d", curveGenerator(data)) // #1
+        .attr("fill", "none")
+        .attr("stroke", blau);
+    
+    innerChart
+        .append("path")
+        .attr("d", lineGenerator(data)) // #1
+        .attr("fill", "none")
+        .attr("stroke", red);  
+    
+    // Es werden noch die folgenden Kurven erwähnt, deren Unterschiede ich bei Bedarf bewerten muss:
+
+    // d3.curveBasis
+    // d3.curveBundle
+    // d3.curveCardinal
+    // d3.curveCatmullRom
+    // d3.curveMonotoneX
+    // d3.curveStep
+
+
+
+    
 };

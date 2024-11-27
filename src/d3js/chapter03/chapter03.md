@@ -168,3 +168,7 @@ anwenden muss. Somit kann man Kurve und Axen gut voneinander trennen.
 
 # Achsen erzeugen
 Achsen werden in D3 ezeugt, indem man ein Scale an die Funktion `axis()` übergibt.
+
+# Line-Chart erzeugen
+Die folgende Grafik zeigt, wie man in D3 eine Kurve aus Daten erzeugt
+![LineChart](./../linechart.png)
