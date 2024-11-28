@@ -94,9 +94,11 @@ const drawLineChart = (data) => {
     
     // Die Line-Generator - Funktion wird in einer Konstanten gespeichert, um sie
     // später nutzen zu können.
-    const lineGenerator = d3.line()
+    const lineGenerator = function(data) {
+        d3.line(data)
         .x(d => xScale(d.date)) // #1
         .y(d => yScale(d.avg_temp_F)); // #2
+    }
         
     const curveGenerator = d3.line()
         .x(d => xScale(d.date))
@@ -104,14 +106,20 @@ const drawLineChart = (data) => {
         .curve(d3.curveCatmullRom);
 
     // Ich habe Kurve und Line eingezeichnet, da sieht man gleich 
-    // den Unterschied
+    // den Unterschied. Bei den Aufrufen von lineGenerator und curveGenerator
+    // habe ich mich gefragt, warum die Funktionen einen Wert entgegennehmen können, obwohl
+    // dieser in der Funktion nicht definiert ist. Der Trick dahinter ist, dass bei der Definition
+    // der Funktionen d3.line() aufgerufen wird und dieser Aufruf eine Funktion zurückliefert, 
+    // die dann einen Parameter in Form der Daten entgegennimmt.
+    // Ich habe die Funktion lineGenerator einmal umgeschrieben, sodass man sieht, was dort passiert.
+    
 
-    innerChart
+    /*innerChart
         .append("path")
         .attr("d", curveGenerator(data)) // #1
         .attr("fill", "none")
         .attr("stroke", blau);
-    
+    */
     innerChart
         .append("path")
         .attr("d", lineGenerator(data)) // #1
