@@ -83,7 +83,7 @@ const drawArc = (data) => {
         .centroid()
 
     
-    // Der oder das Centroid berechnet das Zentrum des 
+    // Der oder das Centroid (Schwerpunkt) berechnet das Zentrum des 
     // Kreisbogens, um die Schrift dort zu platzieren.
     // Hier ist es am einfachsten, sich die generierte Grafik
     // anzusehen.    
