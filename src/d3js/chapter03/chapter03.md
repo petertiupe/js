@@ -172,3 +172,9 @@ Achsen werden in D3 ezeugt, indem man ein Scale an die Funktion `axis()` übergi
 # Line-Chart erzeugen
 Die folgende Grafik zeigt, wie man in D3 eine Kurve aus Daten erzeugt
 ![LineChart](./../linechart.png)
+
+# Arc-Eigenschaften, also die Eigenschaften eines gezeichneten Kreisbogens
+![ArcEigenschaften](./d3_arc_eigenschaften.png)
+Um einen Kreisbogen zu zeichnen, muss man einfach gesagt, die Daten in Polarkoordinaten transformieren.
+Das erste Beispiel in Kapitel 4 macht dies noch von Hand, man kann aber auch die gesamte Datenmenge
+übergeben.
