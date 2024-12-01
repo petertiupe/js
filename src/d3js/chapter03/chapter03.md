@@ -212,3 +212,9 @@ Die Nutzung eines Layouts erfolgt in der Regel immer in drei Schritten:
 Mit den Rückgabedaten des Layouts kann man dann das Zeichnen durchführen.
 
 ![PieLayout](./pieLayout.png)
+
+Die folgende Grafik fasst die Arbeitsschritte bei der Nutzung eines Pie-Layouts noch einmal zusammen
+
+![ArbeitsschrittePieLayout](./PieChartArbeitsschritte.png)
+
+# Stapeln von Shapes
