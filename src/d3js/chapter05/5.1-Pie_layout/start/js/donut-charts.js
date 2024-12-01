@@ -77,6 +77,9 @@ const drawDonutCharts = (data) => {
          .attr("fill", d => colorScale(d.data.format)); // Die Farben stammen aus einem Ordinal-Scale in der scales.js-Datei (siehe dort)
      */
 
+    // Es wird der Text in den Pie-Charts angezeigt. 
+    // Die Platzierung des Texts mit dem Centroid aus Kapitel 4 muss ich mir bei Bedarf noch einmal genauer ansehen,
+    // sollte aber die Funktionsweise von D3 nicht betreffen, daher schiebe ich das.     
     const arcs = donutContainer
       .selectAll(`.arc-${year}`)
       .data(annotatedData)
@@ -110,6 +113,5 @@ const drawDonutCharts = (data) => {
         .style("font-size", "16px")
         .style("font-weight", 500);
   });
-
 
 };
