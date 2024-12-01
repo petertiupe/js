@@ -178,3 +178,37 @@ Die folgende Grafik zeigt, wie man in D3 eine Kurve aus Daten erzeugt
 Um einen Kreisbogen zu zeichnen, muss man einfach gesagt, die Daten in Polarkoordinaten transformieren.
 Das erste Beispiel in Kapitel 4 macht dies noch von Hand, man kann aber auch die gesamte Datenmenge
 übergeben.
+
+# Layouts Pie- und Stacklayout
+D3 Layouts ordnen Datenelemente visuell an. 
+
+## Wie funktionieren D3 Layouts?
+- Datenvorbereitung: Die Daten werden in ein Format gebracht, das das Layout versteht.
+- Layout-Anwendung: Das gewünschte Layout wird auf die Daten angewendet.
+- Positionierung: Das Layout berechnet die Position jedes Elements.
+- Visualisierung: Die berechneten Positionen werden verwendet, um die Elemente auf der Leinwand zu zeichnen.
+
+In dem Buchbeispiel werden die folgenden Layouts behandelt:
+
+- donut-chart, 
+- stacked-bar-chart
+- streamgraph
+
+### Donut-Chart
+Pie- und Donut-Charts visualisieren eine "Teil vom Ganzen"-Beziehung. Sie zeigen an welchen Teil vom Ganzen ein bestimmter
+Datensatz ausmacht. Das D3 Pie-Layout berechnet für jeden Teildatensatz den Start und den End-Winkel basiert auf dem 
+Prozentanteil des Datensatzes. Man kann die Layouts also wieder als eine Transformation der Daten betrachten.
+Aus einem absoluten Datensatz werden Prozente ermittelt und diese gleich noch in Winkel / Bogenmaßdaten
+umgerechnet. Ein bisschen Mathematik, mehr nicht.
+
+*Wichtig* Ein Layout-Generator ist nicht in den eigentlichen Zeichenvorgang involviert, er führt lediglich die Transformation
+der Daten durch.
+
+Die Nutzung eines Layouts erfolgt in der Regel immer in drei Schritten:
+- Formatierung der Daten
+- Initialisieren der Layoutfunktion, sodass diese weiß, welches Datenfeld transformiert werden soll
+- Aufruf des Pie-Layouts mit den vorbereiteten Daten als Argument.
+
+Mit den Rückgabedaten des Layouts kann man dann das Zeichnen durchführen.
+
+![PieLayout](./pieLayout.png)
