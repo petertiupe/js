@@ -15,7 +15,8 @@
   const defineScales = (data) => {
     xScale
       .domain(data.map(d => d.year))
-      .range([0, innerWidth]);
+      .range([0, innerWidth])
+      .paddingInner(0.2);
   
   colorScale
     .domain(formatsInfo.map(f => f.id)) // Die Daten stammen aus der sharedConstants-Datei, dort sind die Farben definiert

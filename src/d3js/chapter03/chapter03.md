@@ -218,3 +218,26 @@ Die folgende Grafik fasst die Arbeitsschritte bei der Nutzung eines Pie-Layouts 
 ![ArbeitsschrittePieLayout](./PieChartArbeitsschritte.png)
 
 # Stapeln von Shapes
+## Steam-Graph
+Steam-Graphen dienen dazu, die zeitliche Entwicklung von Daten darzustellen. Streamgraphs sind ideal, um zu zeigen, wie sich der Anteil verschiedener Gruppen im Laufe der Zeit verändert (im Buchbeispiel die Musikmedien im Laufe der Zeit).
+Daneben kann man mit Steam-Graphen Gruppen vergleichen. Durch die Anordnung der Flächen um eine zentrale Achse können die Entwicklungen verschiedener Gruppen leicht verglichen werden und heben die Trends hervor.
+
+## Wie der Stack-Generator arbeitet
+Datenvorbereitung:
+
+Die Daten müssen in einem spezifischen Format vorliegen: Ein Array von Objekten, wobei jedes Objekt die Daten für eine bestimmte Kategorie enthält.
+Jedes Objekt in diesem Array muss wiederum ein Array von Zahlen enthalten, die die Werte für die verschiedenen Datenpunkte (z.B. Zeitpunkte) darstellen.
+Stackgenerator-Aufruf:
+
+Der Stackgenerator wird mit den vorbereiteten Daten aufgerufen.
+Er berechnet für jeden Datenpunkt die kumulative Summe der Werte aller vorhergehenden Kategorien.
+Dadurch entsteht ein neuer Datensatz, in dem für jeden Datenpunkt ein Objekt mit den folgenden Eigenschaften vorhanden ist:
+y0: Der y-Wert, an dem das Stack beginnt.
+y1: Der y-Wert, an dem das Stack endet.
+Visualisierung:
+
+Mit den neuen Daten kann nun ein gestapeltes Diagramm erstellt werden.
+Für jeden Datenpunkt wird ein Rechteck gezeichnet, dessen Höhe der Differenz zwischen y1 und y0 entspricht.
+
+Die folgende Grafik aus dem Buch illustriert das Ganze:
+![StackGenerator](./StackGeneratorResult.png)
