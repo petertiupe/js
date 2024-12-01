@@ -62,22 +62,54 @@ const drawDonutCharts = (data) => {
     // jetzt geht es an das eigentliche Darstellen auf der Oberfläche
     const arcGenerator = d3.arc()
       .startAngle(d => d.startAngle)  // Die Daten können jetzt aus dem obigen Datensatz genommen werden.
-        .endAngle(d => d.endAngle)
-        .innerRadius(60)
-        .outerRadius(100)
-        .padAngle(0.02)
-        .cornerRadius(3);
+      .endAngle(d => d.endAngle)
+      .innerRadius(60)
+      .outerRadius(100)
+      .padAngle(0.02)
+      .cornerRadius(3);
+
+    /* const arcs = donutContainer
+       .selectAll(`.arc-${year}`)  // Es wird eine CSS-Klasse pro Kreissegment eingeführt, damit die Daten nicht überschrieben werden
+         .data(annotatedData)
+         .join("path")
+         .attr("class", `arc-${year}`) // Referenz auf die CSS-Klasse drei Zeilen vorher
+         .attr("d", arcGenerator)  // Der Generator wird zum Zeichnen genutzt.
+         .attr("fill", d => colorScale(d.data.format)); // Die Farben stammen aus einem Ordinal-Scale in der scales.js-Datei (siehe dort)
+     */
 
     const arcs = donutContainer
-      .selectAll(`.arc-${year}`)  // Es wird eine CSS-Klasse pro Kreissegment eingeführt, damit die Daten nicht überschrieben werden
-        .data(annotatedData)
-        .join("path")
-        .attr("class", `arc-${year}`) // Referenz auf die CSS-Klasse drei Zeilen vorher
-        .attr("d", arcGenerator)  // Der Generator wird zum Zeichnen genutzt.
-        .attr("fill", d => colorScale(d.data.format)); // Die Farben stammen aus einem Ordinal-Scale in der scales.js-Datei (siehe dort)
-  });
+      .selectAll(`.arc-${year}`)
+      .data(annotatedData)
+      .join("g")
+      .attr("class", `arc-${year}`);
+       
+      arcs                                                
+      .append("path")
+      .attr("d", arcGenerator)
+      .attr("fill", d => colorScale(d.data.format));
 
-  // Bis jetzt fehlt noch die Farbe in den Grafiken. Das einfachste wäre, diese gleich mit in dem Datensatz zu haben
+      arcs
+      .append("text")  
+        .text(d => {
+          d["percentage"] = (d.endAngle - d.startAngle) / (2 * Math.PI); // Hier wird die Prozentzahl als Anteil vom Bogenmass 2 * Pi berechnet                  
+          return d3.format(".0%")(d.percentage);
+        })
+        .attr("x", d => {               
+          d["centroid"] = arcGenerator
+            .startAngle(d.startAngle)
+            .endAngle(d.endAngle)
+            .centroid();
+          return d.centroid[0];
+        })
+        .attr("y", d => d.centroid[1])
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("fill", "#f6fafc")
+        .attr("fill-opacity", d => d.percentage  
+          < 0.05 ? 0 : 1)
+        .style("font-size", "16px")
+        .style("font-weight", 500);
+  });
 
 
 };
