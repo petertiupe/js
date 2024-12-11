@@ -5,3 +5,10 @@
 }
 
 /* Axis and ticks */
+/* Durch diese Klasse wird die X-Achse dur*/ 
+.x-axis-streamgraph path {
+  stroke-opacity: 0;
+}
+.x-axis-streamgraph text {
+  fill-opacity: 0;
+}

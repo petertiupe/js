@@ -218,9 +218,19 @@ Die folgende Grafik fasst die Arbeitsschritte bei der Nutzung eines Pie-Layouts 
 ![ArbeitsschrittePieLayout](./PieChartArbeitsschritte.png)
 
 # Stapeln von Shapes
-## Steam-Graph
+## Stream-Graph
 Steam-Graphen dienen dazu, die zeitliche Entwicklung von Daten darzustellen. Streamgraphs sind ideal, um zu zeigen, wie sich der Anteil verschiedener Gruppen im Laufe der Zeit verändert (im Buchbeispiel die Musikmedien im Laufe der Zeit).
 Daneben kann man mit Steam-Graphen Gruppen vergleichen. Durch die Anordnung der Flächen um eine zentrale Achse können die Entwicklungen verschiedener Gruppen leicht verglichen werden und heben die Trends hervor.
+
+Um die Daten für die Anzeige vorzubereiten, nutzt man einen Area-Generator. Dieser benötigt mindestens drei
+sogenannte Accessor-Functions für den Stream-Graph, nämlich für
+- die horizontale Position von jedem Datenpunkt
+- die untere Grenze jedes Stacked-Areas
+- die obere Grenze jedes Stacked-Areas
+
+![AreaGenerator](./areaGenerator.png)
+
+
 
 ## Wie der Stack-Generator arbeitet
 Datenvorbereitung:

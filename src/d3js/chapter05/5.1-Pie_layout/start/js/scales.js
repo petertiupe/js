@@ -6,7 +6,7 @@
 // Für die Donuts wird das Scaling nur mit den Jahren 75, 95 und 2013 aufgerufen, so werden die 
 // Donuts geleimäßig verteilt. Den Code dazu findet man in der Datei donut-charts.js
 
-  // Es wird hier ein Band-Scale definiert.
+  // Es wird hier ein Band-Scale definiert, 
   const xScale = d3.scaleBand();
 
   // Ein Ordinal-Scale ist einfach eine Zuordnung von Werten, hier also der Überschriften (Speicherform der Musik) zu einer Farbe)
